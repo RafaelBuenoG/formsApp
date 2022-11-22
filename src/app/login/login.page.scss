@@ -1,0 +1,24 @@
+
+.titulo{
+  text-align: center;
+}
+
+.login{
+  padding: 1em;
+  background-color: #222428;
+}
+.login ion-item{
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.image{
+  height: 250px;
+  }
+
+  .msg-erro{
+    display: block;
+    text-align: center;
+    font-size: small;
+    color: red;  
+  }
