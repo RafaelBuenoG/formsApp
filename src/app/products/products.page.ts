@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Products } from '../models/Products.model';
+import { ProductsService } from '../services/products.service';
 
 @Component({
   selector: 'app-products',
@@ -7,6 +9,8 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./products.page.scss'],
 })
 export class ProductsPage implements OnInit {
+
+  products: Products = new Products();
 
   productsForm = this.formBuilder.group({
     name: ['', Validators.required],
@@ -23,7 +27,7 @@ export class ProductsPage implements OnInit {
     price: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}]
   };
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private productsService: ProductsService) { }
 
   get name(){
     return this.productsForm.get('name');
@@ -40,6 +44,28 @@ export class ProductsPage implements OnInit {
   get price(){
     return this.productsForm.get('price');
   }
+
+  async salvarP(){
+    if (this.productsForm.valid){
+ 
+       this.products.name = this.productsForm.get('name').value;
+       this.products.description = this.productsForm.get('description').value;
+       this.products.date = this.productsForm.get('date').value;
+       this.products.price = this.productsForm.get('price').value;
+ 
+       const id = await this.productsService.buscarId() as number;
+ 
+       this.products.id = id;
+ 
+       this.productsService.salvar(this.products);
+ 
+       this.productsService.salvarId(id + 1);
+       alert('Sucesso!!!!!');
+ 
+    }else{
+      alert('Formulario inválido!');
+    }
+   }
 
   ngOnInit() {
   }
