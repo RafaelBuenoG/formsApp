@@ -1,27 +1,54 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>products</ion-title>
+    <ion-title>Produtos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
   <ion-card>
-    <ion-item>
-      <ion-input type="text" id="name" placeholder="Nome"></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-input type="text" id="description" placeholder="Descrição"></ion-input>
-    </ion-item>
+    <form [formGroup]="productsForm">
+      <ion-item>
+        <ion-label position="floating">Nome</ion-label>
+        <ion-input type="text" id="name" formControlName="name"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let erro of mensagensErro.name">
+        <span class="msg-erro" *ngIf="name.errors?.[erro.tipo] && (name.dirty || name.touched)">
+          {{erro.aviso}}
+        </span>
+      </ng-container>
 
-    <ion-item>
-      <ion-input type="text" id="date" placeholder="Data de Validade"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="floating">Descrição</ion-label>
+        <ion-input type="text" id="description" formControlName="description"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let erro of mensagensErro.description">
+        <span class="msg-erro" *ngIf="description.errors?.[erro.tipo] && (description.dirty || description.touched)">
+          {{erro.aviso}}
+        </span>
+      </ng-container>
 
-    <ion-item>
-      <ion-input type="number" id="price" placeholder="Preço"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Data</ion-label>
+        <ion-input type="date" id="date" formControlName="date"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let erro of mensagensErro.date">
+        <span class="msg-erro" *ngIf="date.errors?.[erro.tipo] && (date.dirty || date.touched)">
+          {{erro.aviso}}
+        </span>
+      </ng-container>
+
+      <ion-item>
+        <ion-label position="floating">Preço</ion-label>
+        <ion-input type="number" id="price" formControlName="price"></ion-input>
+      </ion-item>
+    </form>
+    <ng-container *ngFor="let erro of mensagensErro.price">
+      <span class="msg-erro" *ngIf="price.errors?.[erro.tipo] && (price.dirty || price.touched)">
+        {{erro.aviso}}
+      </span>
+    </ng-container>
 
   </ion-card>
 
