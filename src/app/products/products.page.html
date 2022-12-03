@@ -30,7 +30,7 @@
       </ng-container>
 
       <ion-item>
-        <ion-label position="stacked">Data</ion-label>
+        <ion-label position="stacked">Data de Validade</ion-label>
         <ion-input type="date" id="date" formControlName="date"></ion-input>
       </ion-item>
       <ng-container *ngFor="let erro of mensagensErro.date">
@@ -43,17 +43,15 @@
         <ion-label position="floating">Preço</ion-label>
         <ion-input type="number" id="price" formControlName="price"></ion-input>
       </ion-item>
-    </form>
     <ng-container *ngFor="let erro of mensagensErro.price">
       <span class="msg-erro" *ngIf="price.errors?.[erro.tipo] && (price.dirty || price.touched)">
         {{erro.aviso}}
       </span>
     </ng-container>
+  </form>
 
   </ion-card>
 
-  <ion-item>
-    <ion-button (click)="salvarP()">Salvar</ion-button>
-  </ion-item>
-
+    <ion-button expand="block" (click)="salvarP()">Salvar</ion-button>
+    
 </ion-content>

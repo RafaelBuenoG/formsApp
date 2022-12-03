@@ -47,21 +47,20 @@ export class ProductsPage implements OnInit {
 
   async salvarP(){
     if (this.productsForm.valid){
- 
        this.products.name = this.productsForm.get('name').value;
        this.products.description = this.productsForm.get('description').value;
        this.products.date = this.productsForm.get('date').value;
        this.products.price = this.productsForm.get('price').value;
- 
+
        const id = await this.productsService.buscarId() as number;
- 
+
        this.products.id = id;
- 
+
        this.productsService.salvar(this.products);
- 
+
        this.productsService.salvarId(id + 1);
        alert('Sucesso!!!!!');
- 
+
     }else{
       alert('Formulario inválido!');
     }
